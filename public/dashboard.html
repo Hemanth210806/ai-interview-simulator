@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard - AI Interview Simulator</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f7ff;
+}
+
+.navbar{
+background:#667eea;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logout{
+cursor:pointer;
+color:#ffdddd;
+}
+
+.container{
+width:90%;
+max-width:1000px;
+margin:auto;
+margin-top:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-decoration:none;
+color:black;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+.icon{
+font-size:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div>AI Interview Simulator</div>
+
+<div>
+<span id="welcomeMsg"></span>
+<span class="logout" onclick="logout()">Logout</span>
+</div>
+
+</div>
+
+
+<div class="container">
+
+<h2>Student Dashboard</h2>
+
+<div class="grid">
+
+<a href="viva.html" class="card">
+<div class="icon">📚</div>
+<h3>Subject Based Viva</h3>
+<p>Practice viva questions from subjects.</p>
+</a>
+
+<a href="company.html" class="card">
+<div class="icon">🏢</div>
+<h3>Company Interview</h3>
+<p>Practice company interview questions.</p>
+</a>
+
+<a href="performance.html" class="card">
+<div class="icon">📊</div>
+<h3>Performance Analysis</h3>
+<p>Check your interview performance.</p>
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+const name = localStorage.getItem("name");
+const usn = localStorage.getItem("usn");
+
+if(name && usn){
+document.getElementById("welcomeMsg").innerText =
+`Hi, ${name} (${usn})`;
+}
+
+function logout(){
+localStorage.clear();
+window.location.href="/login.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+# Node modules
+node_modules/
+
+# Environment variables (important - hides passwords and API keys)
+.env
+
+# Log files
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Temporary files
+temp/
+tmp/
+
+# Build folders
+dist/
+build/

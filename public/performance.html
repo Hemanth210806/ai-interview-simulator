@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Student Performance</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f7ff;
+}
+
+.navbar{
+background:#667eea;
+color:white;
+padding:15px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.container{
+width:90%;
+max-width:900px;
+margin:auto;
+margin-top:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.score{
+font-size:18px;
+font-weight:bold;
+color:#667eea;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div>AI Interview Simulator</div>
+
+<div>
+<button onclick="goDashboard()">Dashboard</button>
+</div>
+
+</div>
+
+
+<div class="container">
+
+<h2>Student Interview Performance</h2>
+
+<div id="results"></div>
+
+</div>
+
+
+<script>
+
+function goDashboard(){
+window.location.href="/dashboard.html";
+}
+
+const usn = localStorage.getItem("usn");
+
+async function loadPerformance(){
+
+try{
+
+const res = await fetch(`/api/student/performance/${usn}`);
+
+const data = await res.json();
+
+const box = document.getElementById("results");
+
+box.innerHTML="";
+
+if(data.length===0){
+
+box.innerHTML="<p>No interview records found.</p>";
+return;
+
+}
+
+data.forEach(r=>{
+
+box.innerHTML+=`
+
+<div class="card">
+
+<h3>Question</h3>
+<p>${r.question}</p>
+
+<h3>Your Answer</h3>
+<p>${r.answer}</p>
+
+<div class="score">Score: ${r.score}/10</div>
+
+<h3>AI Feedback</h3>
+<p>${r.feedback}</p>
+
+<p><i>${new Date(r.created_at).toLocaleString()}</i></p>
+
+</div>
+
+`;
+
+});
+
+}catch(err){
+
+console.log("Performance error:",err);
+
+}
+
+}
+
+loadPerformance();
+
+</script>
+
+</body>
+
+</html>
